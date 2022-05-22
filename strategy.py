@@ -1,15 +1,16 @@
-import matplotlib.pyplot as plt
+'''
 from causis_api.const import get_version
 from causis_api.const import login
 login.username = "yuhao.zheng"
 login.password = "Aiamaman369@"
 login.version = get_version()
-
+'''
 # 1. package
 import os
 import numpy as np
 import pandas as pd
 import datetime
+import matplotlib.pyplot as plt
 
 # 2. parameter
 half_life = 20  # set half-life period as the window for moving average

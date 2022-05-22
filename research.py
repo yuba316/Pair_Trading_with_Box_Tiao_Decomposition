@@ -1,9 +1,10 @@
+'''
 from causis_api.const import get_version
 from causis_api.const import login
 login.username = "yuhao.zheng"
 login.password = "Aiamaman369@"
 login.version = get_version()
-
+'''
 import os
 import numpy as np
 import pandas as pd
@@ -12,7 +13,7 @@ import statsmodels.api as sm
 from statsmodels.tsa.stattools import adfuller
 import seaborn as sns
 import matplotlib.pyplot as plt
-import causis_api.data as caud
+# import causis_api.data as caud
 
 # 本地数据下载>Week1>商品期货数据>商品期货数据_日线_20220319.zip 解压路径
 path = r"D:\work\CTA\data\day_20220319"
@@ -23,7 +24,7 @@ steel = ["rb", "i", "hc", "SM"]
 coal = ["j", "jm"]
 
 # 1. data processing
-info = caud.all_instruments("R")
+# info = caud.all_instruments("R")
 future_list = os.listdir(path)  # file name of all categories
 future_dir = {}
 n = len(future_list)
@@ -31,8 +32,8 @@ for i in range(n):
     name = future_list[i].split(".")[-3]
     if name not in steel+coal:  # only consider steel or coal industry
         continue
-    if info[info["Code"]==name]["BeginDate"].iloc[0] > history:  # at least traded more than one year
-        continue
+#     if info[info["Code"]==name]["BeginDate"].iloc[0] > history:  # at least traded more than one year
+#         continue
     temp = pd.read_csv(os.path.join(path, future_list[i]))
     temp = temp[temp["VOLUME"] != 0].dropna().reset_index(drop=True)  # volume=0 means no trading at that date
     if temp["CLOCK"].iloc[0] > start_date or temp["CLOCK"].iloc[-1] < end_date:
@@ -40,8 +41,9 @@ for i in range(n):
     future_dir[name] = temp
 
 # set the unique trading calendar
-trading_date = caud.get_trading_dates(start_date, end_date)
-trading_date = pd.DataFrame({"CLOCK": trading_date})
+# trading_date = caud.get_trading_dates(start_date, end_date)
+# trading_date = pd.DataFrame({"CLOCK": trading_date})
+trading_date = future_dir["rb"][(future_dir["rb"]["CLOCK"]>=start_date)&(future_dir["rb"]["CLOCK"]<=end_date)][["CLOCK"]]
 trading_date.sort_values(by="CLOCK", inplace=True)
 def data_processing(temp, trading_date):
     # get adjusted price divided by mean to unitize data
