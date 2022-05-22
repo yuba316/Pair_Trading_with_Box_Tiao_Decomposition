@@ -42,9 +42,21 @@ No. | Code | Half-Life
 5 | hc+j+jm | 21
 
 For the first pair, all these 3 categories are from steel industry, so we pick up this pair for the further pair trading strategy developing.
-  
+
 ![Trend](https://github.com/yuba316/Pair_Trading_with_Box_Tiao_Decomposition/blob/main/figure/trend.png)
+
+After applying Box-Tiao decomposition on the first pair, we have the weight vector for these 3 categories as follow:
+
+Code | Weight | Contract Multiplier | Volume
+--- | --- | --- | ---
+rb | 1 | 10 | 100
+i | -0.75038229 | 100 | 8
+SM | -0.12836106 | 5 | 26
+
 ![Price Spred](https://github.com/yuba316/Pair_Trading_with_Box_Tiao_Decomposition/blob/main/figure/spread.png)
+
+
+
 ![mean±sigma](https://github.com/yuba316/Pair_Trading_with_Box_Tiao_Decomposition/blob/main/figure/sigma.png)
 ![signal](https://github.com/yuba316/Pair_Trading_with_Box_Tiao_Decomposition/blob/main/figure/signal.png)
 ![in-sample P&L](https://github.com/yuba316/Pair_Trading_with_Box_Tiao_Decomposition/blob/main/figure/in.png)
