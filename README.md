@@ -55,9 +55,71 @@ SM | -0.12836106 | 5 | 26
 
 ![Price Spred](https://github.com/yuba316/Pair_Trading_with_Box_Tiao_Decomposition/blob/main/figure/spread.png)
 
+### 3. Mean-Reverting Breakthrough Signal
+After we generated the stationary price spread series, with its mean-reverting property, we can open a position when it is moving away from the mean value and cover the position at its returning. A simple method to catch these arbitrage chances is to build up a channel which is $n\sigma$ away from the mean value $\mu\pm n\times\sigma$, and then trade every time when the series breakthroughs the channel.  
+For a white Gaussian noise, theoretically, the frequency of series moving within the channel should be equal to the following possibility:
+$$\frac{\sum_i{I_i(\mu-n\sigma\leq P_t\leq \mu+n\sigma)}}{T}=\phi(\mu+n\sigma)-\phi(\mu-n\sigma)$$
+We hope to have around half of the trading days in-sample within the channel, so we set $n=0.75$.
 
+n Times | In-Sample Trading Frequency | Theoretical Frequency
+--- | --- | ---
+0.75 | 0.5467 | 0.561
+
+However, with this simple method, we can only make money when the series passes the channel, whose final profit is close to $\frac{N_{pass}}{2}\times 0.75\sigma$. By introducing the Bollinger Band Breakthrough signal, it is possible to open a position earlier than the passing time, which would bring us more profit. For example, when the series is far above the upper band but it sends out a signal of breaking down through the lower Bollinger band as a sign that the series is in its process of reverting, opening a short position earlier can earn more profit. We use the half-life 20 and $0.75\sigma$ to build the Bollinger Band.
 
 ![mean±sigma](https://github.com/yuba316/Pair_Trading_with_Box_Tiao_Decomposition/blob/main/figure/sigma.png)
+
+### 4. Back-Test
+item | details
+--- | ---
+Futures Category | rb, i, SM
+Contract Type | continuous contract
+Trading Frequency | daily
+Trade Executing Time | next day
+Price for Signal Construction | back-adjusted closing price
+Trading Rules | When the series is above the upper band and a signal of down breaking through the lower Bollinger band or upper band, sell 100 contracts of rb, buy 8 contracts of i and 26 contracts of SM. When the series is under the lower band and a signal of up breaking through the upper Bollinger band or lower band, buy 100 contracts of rb, sell 8 contracts of i and 26 contracts of SM. When the series touches the mean value, cover all the positions.
+Executing Price Simulation | average of open price and close price next day
+Executing Cost | 0.03%/RMB for rb and i; 3.00RMB/contract for SM
+Price for Profit Calculation | average of open price and close price
+
 ![signal](https://github.com/yuba316/Pair_Trading_with_Box_Tiao_Decomposition/blob/main/figure/signal.png)
+
+Back-Test | in-sample
+--- | ---
+Period | 03/19/2017 - 03/19/2021
+Capital | 1000000.00RMB
+Trading Volume | rb: 100, i: 8, SM: 26
+Trading Fee | rb: 0.03%/RMB, i: 0.03%/RMB, SM: 3.00RM/contract
+
+Statistics | Value
+--- | ---
+Annual Return | 7.5612%
+Max Drawdown | 66616.00RMB
+Sharpe Ratio | 1.8118
+Calmar Ratio | 1.1350\*10^-6
+Win Rate | 84.6154%
+Profit-Loss Ratio | 2.2122
+Average Position Holding Period | 59.3077 days
+
 ![in-sample P&L](https://github.com/yuba316/Pair_Trading_with_Box_Tiao_Decomposition/blob/main/figure/in.png)
+
+Back-Test | out-of-sample
+--- | ---
+Period | 03/19/2021 - 03/18/2022
+Capital | 1000000.00RMB
+Trading Volume | rb: 100, i: 8, SM: 26
+Trading Fee | rb: 0.03%/RMB, i: 0.03%/RMB, SM: 3.00RM/contract
+
+Statistics | Value
+--- | ---
+Annual Return | 1.3788%
+Max Drawdown | 127679.00RMB
+Sharpe Ratio | 0.1643
+Calmar Ratio | 1.0799\*10^-7
+Win Rate | 50.00%
+Profit-Loss Ratio | 1.1247
+Average Position Holding Period | 66.25 days
+
+![out-of-sample P&L](https://github.com/yuba316/Pair_Trading_with_Box_Tiao_Decomposition/blob/main/figure/out.png)
+
 ![Parameter Sensitive](https://github.com/yuba316/Pair_Trading_with_Box_Tiao_Decomposition/blob/main/figure/parameter.png)
