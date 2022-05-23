@@ -91,6 +91,8 @@ Capital | 1000000.00RMB
 Trading Volume | rb: 100, i: 8, SM: 26
 Trading Fee | rb: 0.03%/RMB, i: 0.03%/RMB, SM: 3.00RM/contract
 
+![in-sample P&L](https://github.com/yuba316/Pair_Trading_with_Box_Tiao_Decomposition/blob/main/figure/in.png)
+
 Statistics | Value
 --- | ---
 Annual Return | 7.5612%
@@ -101,14 +103,14 @@ Win Rate | 84.6154%
 Profit-Loss Ratio | 2.2122
 Average Position Holding Period | 59.3077 days
 
-![in-sample P&L](https://github.com/yuba316/Pair_Trading_with_Box_Tiao_Decomposition/blob/main/figure/in.png)
-
 Back-Test | out-of-sample
 --- | ---
 Period | 03/19/2021 - 03/18/2022
 Capital | 1000000.00RMB
 Trading Volume | rb: 100, i: 8, SM: 26
 Trading Fee | rb: 0.03%/RMB, i: 0.03%/RMB, SM: 3.00RM/contract
+
+![out-of-sample P&L](https://github.com/yuba316/Pair_Trading_with_Box_Tiao_Decomposition/blob/main/figure/out.png)
 
 Statistics | Value
 --- | ---
@@ -119,7 +121,5 @@ Calmar Ratio | 1.0799\*10^-7
 Win Rate | 50.00%
 Profit-Loss Ratio | 1.1247
 Average Position Holding Period | 66.25 days
-
-![out-of-sample P&L](https://github.com/yuba316/Pair_Trading_with_Box_Tiao_Decomposition/blob/main/figure/out.png)
 
 ![Parameter Sensitive](https://github.com/yuba316/Pair_Trading_with_Box_Tiao_Decomposition/blob/main/figure/parameter.png)
