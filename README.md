@@ -7,22 +7,22 @@ In 1977, [Box and Tiao](https://pages.stern.nyu.edu/~dbackus/BCZ/HS/BoxTiao_cano
 In this project, we are going to study the cointegration phenomena among 6 steel and coal assets in Chinese commodity futures market. Box-Tiao decomposition would be used to generate the stationary price spread series among those cointegrated assets for further pair-trading strategy developing.
 
 ### 1. Box & Tiao Canonical Decomposition
-In the paper of Box and Tiao, the portfolio $\Pi_t$ is assumed to be satisfied with an VAR(1) model: $\Pi_t=\Pi_{t-1}A+Z$, where $\Pi_{t-1}A$ is an one-step forward prediction for $\Pi_t$ at time $t-1$. So, we have their volatility had the following relationship:
+In the paper of Box and Tiao, the portfolio  $\Pi_t $ is assumed to be satisfied with an VAR(1) model:  $\Pi_t=\Pi_{t-1}A+Z $, where  $\Pi_{t-1}A $ is an one-step forward prediction for  $\Pi_t $ at time  $t-1 $. So, we have their volatility had the following relationship:
 $$Var(\Pi_t)=\sigma_t^2\quad|\quad Var(\Pi_{t-1}A)=\sigma_{t-1}^2\quad|\quad Var(Z_t)=\Sigma$$
 $$\sigma_t^2=\sigma_{t-1}^2+\Sigma$$
 $$1=\frac{\sigma_{t-1}^2}{\sigma_{t}^2}+\frac{\Sigma}{\sigma_{t}^2}=v+\frac{\Sigma}{\sigma_{t}^2}$$
-$v=\frac{\sigma_{t-1}^2}{\sigma_{t}^2}$ is used to describe the predictability of the Var(1) model. So, while minimizing $v$, the portfolio $\Pi_t$ would be close to a white noise series, which is the stationary price spread we want.  
+$v=\frac{\sigma_{t-1}^2}{\sigma_{t}^2}$ is used to describe the predictability of the Var(1) model. So, while minimizing  $v $, the portfolio  $\Pi_t $ would be close to a white noise series, which is the stationary price spread we want.  
   
-In this project, we have the price of commodity futures as $S_t$, the weight of asset $x$, and the linear combination with the worst forecasting capability as $\Pi_t$ with the minimum $v=\frac{\sigma_{t-1}^2}{\sigma_{t}^2}$. So, we have the following formula:
+In this project, we have the price of commodity futures as  $S_t $, the weight of asset  $x $, and the linear combination with the worst forecasting capability as  $\Pi_t $ with the minimum  $v=\frac{\sigma_{t-1}^2}{\sigma_{t}^2} $. So, we have the following formula:
 $$\Pi_t=S_tx$$
 $$S_tx=S_{t-1}Ax+Z_tx$$
 $$v=\frac{x^TA^T\Gamma Ax}{x^T\Gamma x}$$
 $$\Gamma=\frac{1}{m}S_t^TS_t\quad(S_t=Demean(S_t))$$
-The process of minimizing $v$ is equal to have the solution for eigenvalue $\lambda$ satisfied with the following equation:
+The process of minimizing  $v $ is equal to have the solution for eigenvalue  $\lambda $ satisfied with the following equation:
 $$det(\lambda\Gamma-A^T\Gamma A)=0$$
-So, we have $x=\Gamma^{-\frac{1}{2}}z$, where $z$ is the eigenvector with the minimum eigenvalue of the following matrix:
+So, we have  $x=\Gamma^{-\frac{1}{2}}z $, where  $z $ is the eigenvector with the minimum eigenvalue of the following matrix:
 $$\Gamma^{-\frac{1}{2}}A^T\Gamma A\Gamma^{-\frac{1}{2}}$$
-Since $A$ is the slope parameter of the Linear Regression for $S_t$ to $S_{t-1}$ and $\Gamma$ is the covariance matric of $S_t$, we have:
+Since  $A $ is the slope parameter of the Linear Regression for  $S_t $ to  $S_{t-1} $ and  $\Gamma $ is the covariance matric of  $S_t $, we have:
 $$\Gamma^{-\frac{1}{2}}A^T\Gamma A\Gamma^{-\frac{1}{2}}$$
 $$=(S_t^TS_t)^{-\frac{1}{2}}A^T(S_{t-1}^TS_{t-1})A(S_t^TS_t)^{-\frac{1}{2}}$$
 $$=(S_t^TS_t)^{-\frac{1}{2}}(S_{t-1}A)^T(S_{t-1}A)(S_t^TS_t)^{-\frac{1}{2}}$$
